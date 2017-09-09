@@ -6,7 +6,7 @@ app.use(express.static('public'));
 
 // route for /cities - do AJAX for html injection
 app.get('/cities', function(request, response){
-	var someCities = ["Providence", "Austin", "Melbourne", "Detroit"];
+	var someCities = ["Providence", "Austin", "Melbourne", "Detroit", "Marseille", "Woonsocket", "Accra", "Coventry", "Cordoba", "Oslo"];
 	response.json(someCities);
 });
 
