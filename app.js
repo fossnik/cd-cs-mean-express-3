@@ -5,17 +5,18 @@ var app = express();
 app.use(express.static('public'));
 
 // route for /cities - do AJAX for html injection
+var someCities = {"Providence": "Rhode Island",
+									"Austin": "Texas",
+									"Melbourne": "Australia",
+									"Detroit": "Michegan",
+									"Marseille": "France",
+									"Woonsocket": "Rhode Island",
+									"Accra": "Ghana",
+									"Coventry": "Rhode Island",
+									"Cordoba": "Argentina",
+									"Edinburgh": "Scotland"};
+
 app.get('/cities', function(request, response){
-	var someCities = {"Providence": "Rhode Island",
-										"Austin": "Texas",
-										"Melbourne": "Australia",
-										"Detroit": "Michegan",
-										"Marseille": "France",
-										"Woonsocket": "Rhode Island",
-										"Accra": "Ghana",
-										"Coventry": "Rhode Island",
-										"Cordoba": "Argentina",
-										"Edinburgh": "Scotland"};
 	if (request.query.limit > 0) {
 		if (request.query.limit > Object.keys(someCities).length) {
 			send.status(401);
@@ -23,6 +24,17 @@ app.get('/cities', function(request, response){
 		response.json(Object.keys(someCities).slice(0, request.query.limit));
 	} else {
 		response.json(someCities);
+	}
+});
+
+// 2nd route - returns state from the relevant key-value pair (city-state)
+app.get('/cities/:city', function(request, response){
+	var state = someCities[request.params.city];
+	if (!state) {
+		// state not found
+		response.status(404);
+	} else {
+		response.json(state);
 	}
 });
 
