@@ -1,0 +1,27 @@
+{
+  "name": "cd-cs-mean-express-3",
+  "version": "1.0.0",
+  "description": "mean-3",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.15.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fossnik/cd-cs-mean-express-3.git"
+  },
+  "keywords": [
+    "MEAN",
+    "express"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fossnik/cd-cs-mean-express-3/issues"
+  },
+  "homepage": "https://github.com/fossnik/cd-cs-mean-express-3#readme"
+}
