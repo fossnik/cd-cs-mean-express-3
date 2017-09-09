@@ -29,7 +29,9 @@ app.get('/cities', function(request, response){
 
 // 2nd route - returns state from the relevant key-value pair (city-state)
 app.get('/cities/:city', function(request, response){
-	var state = someCities[request.params.city];
+	var req_city = request.params.city.lower();
+	response.json(req_city);
+	var state = someCities[];
 	if (!state) {
 		// state not found
 		response.status(404).json('No description found for ' + request.params.city);
