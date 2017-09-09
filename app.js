@@ -32,7 +32,7 @@ app.get('/cities/:city', function(request, response){
 	var state = someCities[request.params.city];
 	if (!state) {
 		// state not found
-		response.status(404);
+		response.status(404).json('No description found for ' + request.params.city);
 	} else {
 		response.json(state);
 	}
