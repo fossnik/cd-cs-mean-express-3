@@ -20,6 +20,7 @@ app.get('/cities', function(request, response){
 	if (request.query.limit > 0) {
 		if (request.query.limit > Object.keys(someCities).length) {
 			send.status(401);
+			response.end();
 		}
 		response.json(Object.keys(someCities).slice(0, request.query.limit));
 	} else {
@@ -27,11 +28,16 @@ app.get('/cities', function(request, response){
 	}
 });
 
+// "normalizing" request parameter (case insensitivity)
+app.param('city', function(request, response, next){
+	// convert 'providence' to 'Providence' - passthrough
+	request.cityLower = request.params.city.slice(0,1).toUpperCase() + request.params.city.slice(1).toLowerCase();
+	next();
+});
+
 // 2nd route - returns state from the relevant key-value pair (city-state)
 app.get('/cities/:city', function(request, response){
-	var req_city = request.params.city.lower();
-	response.json(req_city);
-	var state = someCities[];
+	var state = someCities[request.params.cityLower];
 	if (!state) {
 		// state not found
 		response.status(404).json('No description found for ' + request.params.city);
