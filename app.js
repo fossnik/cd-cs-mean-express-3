@@ -31,7 +31,7 @@ app.get('/cities', function(request, response){
 // "normalizing" request parameter (case insensitivity)
 app.param('city', function(request, response, next){
 	// convert 'providence' to 'Providence' - passthrough
-	request.cityLower = request.params.city.slice(0,1).toUpperCase() + request.params.city.slice(1).toLowerCase();
+	request.params.cityLower = request.params.city.slice(0,1).toUpperCase() + request.params.city.slice(1).toLowerCase();
 	next();
 });
 
@@ -40,7 +40,7 @@ app.get('/cities/:city', function(request, response){
 	var state = someCities[request.params.cityLower];
 	if (!state) {
 		// state not found
-		response.status(404).json('No description found for ' + request.params.city);
+		response.status(404).json('No description found for ' + request.params.cityLower);
 	} else {
 		response.json(state);
 	}
