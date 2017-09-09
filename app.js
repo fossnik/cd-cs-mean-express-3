@@ -8,6 +8,9 @@ app.use(express.static('public'));
 app.get('/cities', function(request, response){
 	var someCities = ["Providence", "Austin", "Melbourne", "Detroit", "Marseille", "Woonsocket", "Accra", "Coventry", "Cordoba", "Oslo"];
 	if (request.query.limit > 0) {
+		if (request.query.limit > someCities.length) {
+			send.status(401);
+		}
 		response.json(someCities.slice(0, request.query.limit));
 	} else {
 		response.json(someCities);
